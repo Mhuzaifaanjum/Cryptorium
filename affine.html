@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affine Cipher</title>
+    <link rel="stylesheet" href="ceaser.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Cryptorium</h1>
+        <p class="slogan">Your Gateway to Cryptographic Mastery</p>
+        <nav>
+            
+            <a href="home.html" class="navlink">Home</a>
+            <a href="ceaer cipher.html" class="navlink">Caesar</a>
+            <a href="affine.html" class="navlink">Affine</a>
+            <a href="veginere.html" class="navlink">Vigenere</a>
+            <a href="DES.html" class="navlink">DES</a>
+            <a href="AES.html" class="navlink">AES</a>
+            <a href="RSA.html" class="navlink">RSA</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Encrypt')" id="defaultOpen">Encrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'Decrypt')">Decrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">History</button>
+            <button class="tablinks" onclick="openTab(event, 'Article')">Working</button>
+        </div>
+
+        <div id="Encrypt" class="tabcontent">
+            <h2>Encrypt</h2>
+            <label for="encryptText">Enter Text:</label>
+            <input type="text" id="encryptText" placeholder="Enter text...">
+            <label for="encryptKeyA">Key A:</label>
+            <input type="number" id="encryptKeyA" placeholder="Enter key A...">
+            <label for="encryptKeyB">Key B:</label>
+            <input type="number" id="encryptKeyB" placeholder="Enter key B...">
+            <button onclick="encryptText()">Encrypt</button>
+            <label for="encryptedText">Encrypted Text:</label>
+            <input type="text" id="encryptedText" readonly>
+            <button onclick="clearText('encrypt')">Clear</button>
+        </div>
+
+        <div id="Decrypt" class="tabcontent">
+            <h2>Decrypt</h2>
+            <label for="decryptText">Enter Encrypted Text:</label>
+            <input type="text" id="decryptText" placeholder="Enter encrypted text...">
+            <label for="decryptKeyA">Key A:</label>
+            <input type="number" id="decryptKeyA" placeholder="Enter key A...">
+            <label for="decryptKeyB">Key B:</label>
+            <input type="number" id="decryptKeyB" placeholder="Enter key B...">
+            <button onclick="decryptText()">Decrypt</button>
+            <label for="decryptedText">Decrypted Text:</label>
+            <input type="text" id="decryptedText" readonly>
+            <button onclick="clearText('decrypt')">Clear</button>
+        </div>
+
+        <div id="History" class="tabcontent">
+            <h2>History</h2>
+            <textarea id="history" readonly></textarea>
+            <button onclick="clearHistory()">Clear History</button>
+            <button onclick="saveHistory()">Save History</button>
+            <button onclick="searchHistory()">Search History</button>
+        </div>
+
+        <div id="Article" class="tabcontent">
+            <h2>Affine Cipher</h2>
+            <section id="history">
+                <h3>History</h3>
+                <p>
+                    The Affine Cipher is a type of monoalphabetic substitution cipher, which was developed by the French mathematician Étienne Bazeries in the late 19th century. It extends the basic idea of substitution ciphers by incorporating mathematical functions to enhance security. The cipher derives its name from the affine transformation, a type of linear transformation used in mathematics.
+                </p>
+            </section>
+            <section id="working">
+                <h3>Working</h3>
+                <p>
+                    The Affine Cipher is based on a mathematical function that combines both a multiplicative and an additive shift to transform each letter in the plaintext. The encryption and decryption processes use modular arithmetic to map letters in a way that the same transformation can be reversed.
+                </p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Alphabet:</strong> Typically, the standard English alphabet of 26 letters is used. Each letter is assigned a number from 0 to 25.</li>
+                    <li><strong>Key:</strong> The encryption process uses two keys:
+                        <ul>
+                            <li><strong>a</strong> is the multiplicative key, which must be coprime with 26 (i.e., <code>gcd(a, 26) = 1</code>).</li>
+                            <li><strong>b</strong> is the additive key.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section id="algorithm">
+                <h3>Algorithm</h3>
+                <h4>Encryption</h4>
+                <p>
+                    <strong>Key Definition:</strong> Choose keys <code>a</code> and <code>b</code>. Ensure that <code>a</code> is coprime with 26.
+                </p>
+                <p>
+                    <strong>Encryption Formula:</strong>
+                    <br><code>E(x) = (a ⋅ x + b) mod 26</code>
+                    <br>where <code>x</code> is the numerical value of the plaintext letter (A=0, B=1, ..., Z=25).
+                </p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Plaintext: HELLO</li>
+                    <li>Keys: <code>a = 5</code>, <code>b = 8</code></li>
+                    <li>Conversion of 'H' to a number: 7</li>
+                    <li>Encryption of 'H': <code>E(7) = (5 ⋅ 7 + 8) mod 26 = 43 mod 26 = 17</code></li>
+                    <li>'H' (7) is encrypted to the letter with index 17, which is 'R'.</li>
+                </ul>
+
+                <h4>Decryption</h4>
+                <p>
+                    <strong>Key Definition:</strong> The decryption key <code>a</code> must have an inverse modulo 26. Compute the modular inverse of <code>a</code>, denoted as <code>a<sup>-1</sup></code>, such that:
+                    <br><code>a ⋅ a<sup>-1</sup> ≡ 1 mod 26</code>
+                    You can use the Extended Euclidean Algorithm to find <code>a<sup>-1</sup></code>.
+                </p>
+                <p>
+                    <strong>Decryption Formula:</strong>
+                    <br><code>D(y) = a<sup>-1</sup> ⋅ (y - b) mod 26</code>
+                    <br>where <code>y</code> is the numerical value of the ciphertext letter.
+                </p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Ciphertext: R (17)</li>
+                    <li>Keys: <code>a = 5</code>, <code>b = 8</code></li>
+                    <li>Find <code>a<sup>-1</sup></code>. For <code>a = 5</code>, <code>a<sup>-1</sup> = 21</code> (since <code>5 ⋅ 21 ≡ 1 mod 26</code>)</li>
+                    <li>Decryption of 'R': <code>D(17) = 21 ⋅ (17 - 8) mod 26 = 21 ⋅ 9 mod 26 = 189 mod 26 = 7</code></li>
+                    <li>'R' (17) is decrypted to the letter with index 7, which is 'H'.</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© Muhammad Huzaifa</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/ayymen.khan" class="social-link facebook"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/shorttemperd007/" class="social-link instagram"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/muhammad-huzaifa-anjum-a80aa0279/" class="social-link linkedin"><img src="images/link.png" alt="LinkedIn"></a>
+                <a href="https://x.com/ShortTemperd007" class="social-link x"><img src="images/x2.png" alt="X"></a>
+                <a href="https://api.whatsapp.com/send?phone=923106771230" class="social-link whatsapp"><img src="images/whats.png" alt="WhatsApp"></a>
+            </div>
+            <p class="address">Address: Opposite New Central Jail Arif Colony Street # 1 Building # 19</p>
+        </div>
+    </footer>
+
+    <script src="affine.js"></script>
+    
+</body>
+</html>

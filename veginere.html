@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigenère Cipher</title>
+    <link rel="stylesheet" href="ceaser.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+</head>
+<body>
+    
+
+    <header>
+        <h1>Cryptorium</h1>
+        <p class="slogan">Your Gateway to Cryptographic Mastery</p>
+        <nav>
+            <a href="home.html" class="navlink">Home</a>
+            <a href="ceaer cipher.html" class="navlink">Caesar</a>
+            <a href="affine.html" class="navlink">Affine</a>
+            <a href="veginere.html" class="navlink">Vigenere</a>
+            <a href="DES.html" class="navlink">DES</a>
+            <a href="AES.html" class="navlink">AES</a>
+            <a href="RSA.html" class="navlink">RSA</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Encrypt')" id="defaultOpen">Encrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'Decrypt')">Decrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">History</button>
+            <button class="tablinks" onclick="openTab(event, 'Info')">Working</button>
+        </div>
+
+        <div id="Encrypt" class="tabcontent">
+            <h2>Encrypt</h2>
+            <label for="encryptText">Enter Text:</label>
+            <input type="text" id="encryptText" placeholder="Enter text...">
+            <label for="encryptKey">Key:</label>
+            <input type="text" id="encryptKey" placeholder="Enter key...">
+            <button onclick="encryptText()">Encrypt</button>
+            <label for="encryptedText">Encrypted Text:</label>
+            <input type="text" id="encryptedText" readonly>
+            <button onclick="clearText('encrypt')">Clear</button>
+        </div>
+
+        <div id="Decrypt" class="tabcontent">
+            <h2>Decrypt</h2>
+            <label for="decryptText">Enter Encrypted Text:</label>
+            <input type="text" id="decryptText" placeholder="Enter encrypted text...">
+            <label for="decryptKey">Key:</label>
+            <input type="text" id="decryptKey" placeholder="Enter key...">
+            <button onclick="decryptText()">Decrypt</button>
+            <label for="decryptedText">Decrypted Text:</label>
+            <input type="text" id="decryptedText" readonly>
+            <button onclick="clearText('decrypt')">Clear</button>
+        </div>
+
+        <div id="History" class="tabcontent">
+            <h2>History</h2>
+            <textarea id="history" readonly></textarea>
+            <button onclick="clearHistory()">Clear History</button>
+            <button onclick="saveHistory()">Save History</button>
+            <button onclick="searchHistory()">Search History</button>
+        </div>
+
+        <div id="Info" class="tabcontent">
+            <h2>Vigenère Cipher Information</h2>
+            <section>
+                <h3>History</h3>
+                <p>The Vigenère Cipher is named after the French diplomat Blaise de Vigenère, who described it in the 16th century, although it was known and used earlier by various cryptographers. The cipher was often mistakenly attributed to Vigenère for a long time, which is why it is sometimes called the "Vigenère Square" or "Vigenère Table." The cipher became renowned for its complexity compared to simple substitution ciphers, offering a much higher level of security through its use of a keyword or phrase to vary the encryption method.</p>
+            </section>
+            <section>
+                <h3>Working</h3>
+                <p>The Vigenère Cipher is a method of encrypting alphabetic text by using a series of different Caesar ciphers based on the letters of a keyword. This makes it a polyalphabetic substitution cipher, as opposed to monoalphabetic ciphers like the Caesar Cipher.</p>
+                <p><strong>Polyalphabetic Cipher:</strong> Instead of shifting by a single fixed amount (as in the Caesar Cipher), the Vigenère Cipher shifts by a different amount for each letter of the plaintext, based on a keyword.</p>
+            </section>
+            <section>
+                <h3>Key Concepts</h3>
+                <p><strong>Alphabet:</strong> Typically, the standard English alphabet of 26 letters is used.</p>
+                <p><strong>Keyword:</strong> The keyword is a sequence of letters that determines the shift for each letter in the plaintext. The length of the keyword is crucial as it affects the encryption's complexity.</p>
+            </section>
+            <section>
+                <h3>Algorithm</h3>
+                <h4>Encryption</h4>
+                <p><strong>Key Definition:</strong> Choose a keyword. The keyword should be repeated or truncated to match the length of the plaintext.</p>
+                <p><strong>Encryption Formula:</strong></p>
+                <pre>
+E(p_i) = (p_i + k_i) mod 26
+                </pre>
+                <p>Where:</p>
+                <ul>
+                    <li><strong>E(p_i)</strong> is the encrypted letter.</li>
+                    <li><strong>p_i</strong> is the position of the plaintext letter.</li>
+                    <li><strong>k_i</strong> is the position of the keyword letter.</li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <p>Plaintext: HELLO</p>
+                <p>Keyword: KEY (repeated to match the length of the plaintext: KEYKE)</p>
+                <p>Encryption:</p>
+                <pre>
+H (7) + K (10) = 17 -> R
+E (4) + E (4) = 8 -> I
+L (11) + Y (24) = 35 mod 26 = 9 -> J
+L (11) + K (10) = 21 -> V
+O (14) + E (4) = 18 -> S
+                </pre>
+                <p>Encrypted Text: RIJVS</p>
+
+                <h4>Decryption</h4>
+                <p><strong>Key Definition:</strong> Use the same keyword as in encryption.</p>
+                <p><strong>Decryption Formula:</strong></p>
+                <pre>
+D(c_i) = (c_i - k_i + 26) mod 26
+                </pre>
+                <p>Where:</p>
+                <ul>
+                    <li><strong>D(c_i)</strong> is the decrypted letter.</li>
+                    <li><strong>c_i</strong> is the position of the ciphertext letter.</li>
+                    <li><strong>k_i</strong> is the position of the keyword letter.</li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <p>Ciphertext: RIJVS</p>
+                <p>Keyword: KEY (repeated to match the length of the ciphertext: KEYKE)</p>
+                <p>Decryption:</p>
+                <pre>
+R (17) - K (10) = 7 -> H
+I (8) - E (4) = 4 -> E
+J (9) - Y (24) = -15 + 26 = 11 -> L
+V (21) - K (10) = 11 -> L
+S (18) - E (4) = 14 -> O
+                </pre>
+                <p>Decrypted Text: HELLO</p>
+            </section>
+            <section>
+                <h3>Summary</h3>
+                <p>The Vigenère Cipher enhances the Caesar Cipher by employing a keyword to shift letters in a manner that is less predictable. This polyalphabetic approach makes it more secure than monoalphabetic ciphers, though it can still be vulnerable to frequency analysis if not used properly.</p>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© Muhammad Huzaifa</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/ayymen.khan" class="social-link facebook"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/shorttemperd007/" class="social-link instagram"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/muhammad-huzaifa-anjum-a80aa0279/" class="social-link linkedin"><img src="images/link.png" alt="LinkedIn"></a>
+                <a href="https://x.com/ShortTemperd007" class="social-link x"><img src="images/x2.png" alt="X"></a>
+                <a href="https://api.whatsapp.com/send?phone=923106771230" class="social-link whatsapp"><img src="images/whats.png" alt="WhatsApp"></a>
+            </div>
+            <p class="address">Address: Opposite New Central Jail Arif Colony Street # 1 Building # 19</p>
+        </div>
+    </footer>
+    <script src="vigenere.js"></script>
+</body>
+</html>

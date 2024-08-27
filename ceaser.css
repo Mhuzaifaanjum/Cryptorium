@@ -1,0 +1,425 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e8eddf; /* Light background color */
+    background-image: url('images/bg2.jpg'); /* Background image */
+    background-size: cover; /* Ensure the image covers the entire body */
+    background-position: center; /* Center the image */
+    color: #333533; /* Dark gray text color */
+    margin: 0;
+    padding: 0;
+    font-size: 18px; /* Increased font size for better readability */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+header {
+    background: linear-gradient(135deg, rgba(36, 36, 35, 0.6), rgba(51, 53, 51, 0.6)), 
+                url('images/bg2...jpg'); /* Gradient with transparency */
+    background-size: cover; /* Ensure the image covers the header */
+    background-position: center; /* Center the image */
+    padding: 30px; /* Increased padding for a more spacious header */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Full-width header */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+/* Slogan Styling */
+.slogan {
+    font-family: 'Roboto', sans-serif; /* Stylish font */
+    color: #f0f0f0; /* Light color for better contrast */
+    font-size: 1rem; /* Slightly smaller font size */
+    margin-top: 10px; /* Space above the slogan */
+    margin-bottom: 20px; /* Space below the slogan */
+    font-weight: 400; /* Regular font weight */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Start with a slight downward shift */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out; /* Smooth transition */
+    animation: fadeInUp 1s ease-in-out forwards; /* Animation */
+}
+
+/* Keyframes for the fade-in-up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Optional: Add a subtle text shadow */
+.slogan {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Adds a slight shadow for depth */
+}
+
+/* Hover effect on header */
+header:hover .slogan {
+    animation: bounceIn 1s ease-in-out; /* Bounce animation on hover */
+}
+
+/* Keyframes for the bounce-in animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+header h1 {
+    margin: 0;
+    color: #cfdbd5; /* Light text color */
+    font-size: 3.5em; /* Larger font size for emphasis */
+    font-family: 'Roboto', sans-serif; /* Stylish font for headings */
+    font-weight: 700; /* Bold weight for prominence */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+    transition: transform 0.3s ease;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #cfdbd5; /* Light text color */
+    background-color: #000000; /* Solid background color */
+    padding: 15px 25px; /* Increased padding for larger buttons */
+    margin: 0 7px; /* Increased margin between buttons */
+    border-radius: 5px;
+    font-size: 1.3em; /* Slightly larger font size */
+    display: inline-block;
+    font-family: 'Poppins', sans-serif; /* Stylish font for links */
+    font-weight: 600; /* Semi-bold weight for emphasis */
+    text-transform: uppercase; /* Uppercase for buttons */
+    letter-spacing: 1px; /* Spacing between letters */
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* Initial state for 3D effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Initial shadow */
+}
+
+header nav a:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg) scale(1.1); /* Apply 3D rotation and scaling */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+}
+
+.container {
+    padding: 30px; /* Increased padding for a more spacious container */
+    background-color: #cfdbd5; /* Light background color */
+    margin: 20px auto;
+    width: 80%;
+    max-width: 1000px; /* Increased max-width for a wider container */
+    border-radius: 10px;
+    padding-bottom: 100px; /* Add space at the bottom to prevent overlap with footer */
+}
+
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #333533; /* Dark gray border */
+    background-color: #f5cb5c; /* Solid background color */
+    display: flex;
+    justify-content: space-around;
+}
+
+.tab button, .btn {
+    background-color: inherit;
+    color: #242423; /* Dark text color */
+    padding: 16px 20px; /* Increased padding for larger buttons */
+    border: none;
+    cursor: pointer;
+    width: 33.33%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 18px; /* Slightly larger font size */
+    font-family: 'Poppins', sans-serif; /* Stylish font for buttons */
+    perspective: 1000px; /* Perspective for 3D effect */
+}
+
+.tab button:hover, .btn:hover {
+    transform: rotateX(10deg) rotateY(10deg) scale(1.1); /* Apply 3D rotation and scaling */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+}
+
+.tabcontent {
+    display: none;
+    padding: 30px; /* Increased padding for a more spacious content area */
+    background-color: #e8eddf; /* Light background color */
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif; /* Stylish font for tab content */
+}
+
+input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 12px; /* Increased padding for larger input fields */
+    margin: 10px 0;
+    border: 1px solid #333533; /* Dark gray border */
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Stylish font for inputs */
+}
+
+textarea {
+    height: 220px; /* Increased height for textarea */
+}
+
+button, .btn {
+    background-color: #f5cb5c; /* Solid background color */
+    color: #242423; /* Dark text color */
+    padding: 12px 25px; /* Increased padding for larger buttons */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif; /* Stylish font for buttons */
+    font-weight: 700; /* Bold weight for prominence */
+    perspective: 1000px; /* Perspective for 3D effect */
+}
+
+button:hover, .btn:hover {
+    transform: rotateX(10deg) rotateY(10deg) scale(1.1); /* Apply 3D rotation and scaling */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #333533, #242423); /* Dark gradient background */
+    position: relative; /* Changed from fixed to relative */
+    width: 100%;
+    bottom: 0;
+    font-family: 'Poppins', sans-serif; /* Stylish font for footer */
+    font-weight: 600; /* Semi-bold weight */
+    color: #cfdbd5; /* Light text color */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    margin: 10px 0;
+}
+
+.footer-links a {
+    display: inline-block;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
+}
+
+.footer-links img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    border-radius: 50%;
+    background-color: #333533;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-links a:hover img {
+    background-color: #f5cb5c;
+    transform: scale(1.1);
+}
+
+.address {
+    margin-top: 10px;
+    font-size: 1em; /* Slightly larger font size */
+    color: #cfdbd5;
+}
+
+
+
+
+
+/* General styles for the main content */
+main {
+    padding: 20px;
+}
+
+/* Image Gallery Container */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Individual Image Card */
+.image-card {
+    width: 300px;
+    height: 200px;
+    perspective: 1000px; /* Perspective for 3D effect */
+}
+
+.image-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* 3D effect for child elements */
+}
+
+.image-card:hover .image-card-inner {
+    transform: rotateY(180deg); /* Flip effect */
+}
+
+.image-card-front, .image-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide backface of the card */
+}
+
+.image-card-front {
+    background: #fff;
+}
+
+.image-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the card */
+    border-radius: 8px;
+}
+
+.image-card-back {
+    background: #333; /* Dark background for the back */
+    color: #fff; /* White text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotateY(180deg); /* Rotate the back face */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.image-card-back h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.image-card-back p {
+    font-size: 1rem;
+}
+
+
+
+
+
+
+/* General styles for hero section */
+.hero {
+    background: #f5f5f5; /* Light background */
+    text-align: center;
+    padding: 50px 20px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.hero .cta-button {
+    background: #007BFF; /* Button color */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.hero .cta-button:hover {
+    background: #0056b3; /* Darker button color on hover */
+}
+
+/* Styles for featured ciphers */
+.featured-ciphers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.cipher-card {
+    width: 300px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.cipher-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cipher-card h3 {
+    margin: 15px 0;
+}
+
+.cipher-card p {
+    padding: 0 15px;
+}
+
+.cipher-card .cta-button {
+    display: inline-block;
+    margin: 10px 0;
+    background: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.cipher-card .cta-button:hover {
+    background: #0056b3;
+}
+
+/* Styles for recent articles */
+.recent-articles {
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.recent-articles article {
+    margin-bottom: 20px;
+}
+
+.recent-articles h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.recent-articles p {
+    font-size: 1rem;
+}
+
+.recent-articles .cta-button {
+    background: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.recent-articles .cta-button:hover {
+    background: #0056b3;
+}

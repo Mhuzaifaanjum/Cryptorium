@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+    <link rel="stylesheet" href="ceaser.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+          <h1>Cryptorium</h1>
+          
+        <p class="slogan">Your Gateway to Cryptographic Mastery</p>
+        
+        <nav>
+            <a href="home.html" class="navlink">Home</a>
+            <a href="ceaer cipher.html" class="navlink">Caesar</a>
+            <a href="affine.html" class="navlink">Affine</a>
+            <a href="veginere.html" class="navlink">Vigenere</a>
+            <a href="DES.html" class="navlink">DES</a>
+            <a href="AES.html" class="navlink">AES</a>
+            <a href="RSA.html" class="navlink">RSA</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Encrypt')" id="defaultOpen">Encrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'Decrypt')">Decrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">History</button>
+            <button class="tablinks" onclick="openTab(event, 'Article')">Working</button>
+        </div>
+
+        <div id="Encrypt" class="tabcontent">
+            <h2>Encrypt</h2>
+            <label for="encryptText">Enter Text:</label>
+            <input type="text" id="encryptText" placeholder="Enter text...">
+            <label for="encryptShift">Shift:</label>
+            <input type="number" id="encryptShift" placeholder="Shift...">
+            <button onclick="encryptText()">Encrypt</button>
+            <label for="encryptedText">Encrypted Text:</label>
+            <input type="text" id="encryptedText" readonly>
+            <button onclick="clearText('encrypt')">Clear</button>
+        </div>
+
+        <div id="Decrypt" class="tabcontent">
+            <h2>Decrypt</h2>
+            <label for="decryptText">Enter Encrypted Text:</label>
+            <input type="text" id="decryptText" placeholder="Enter encrypted text...">
+            <label for="decryptShift">Shift:</label>
+            <input type="number" id="decryptShift" placeholder="Shift...">
+            <button onclick="decryptText()">Decrypt</button>
+            <label for="decryptedText">Decrypted Text:</label>
+            <input type="text" id="decryptedText" readonly>
+            <button onclick="clearText('decrypt')">Clear</button>
+        </div>
+
+        <div id="History" class="tabcontent">
+            <h2>History</h2>
+            <textarea id="history" readonly></textarea>
+            <button onclick="clearHistory()">Clear History</button>
+        </div>
+        
+        <!-- New Section for Article -->
+        <div id="Article"class="tabcontent">
+            <h2>Caesar Cipher: History, Working, and Algorithm</h2>
+            <p><strong>History</strong></p>
+            <p>The Caesar Cipher is named after Julius Caesar, who is reputed to have used this encryption technique to communicate with his generals. It is one of the earliest and simplest methods of encryption, dating back to the Roman Empire around 58 BC.</p>
+            
+            <p><strong>Working</strong></p>
+            <p>The Caesar Cipher is a type of substitution cipher where each letter in the plaintext is replaced by a letter some fixed number of positions down or up the alphabet. For example, with a shift of 3, 'A' would be replaced by 'D', 'B' would become 'E', and so on.</p>
+            
+            <p><strong>Key Concepts:</strong></p>
+            <ul>
+                <li><strong>Shift (Key):</strong> The number of positions each letter in the plaintext is shifted.</li>
+                <li><strong>Alphabet:</strong> Typically, the standard English alphabet of 26 letters.</li>
+            </ul>
+            
+            <p><strong>Algorithm</strong></p>
+            <p>Here's how the Caesar Cipher algorithm works:</p>
+            <ol>
+                <li><strong>Define the Shift Value:</strong> Determine the shift amount (key). For example, if the shift is 3, then each letter will be replaced by the letter that is 3 positions further in the alphabet.</li>
+                <li><strong>Encryption Process:</strong>
+                    <ul>
+                        <li><strong>Input:</strong> Plaintext message.</li>
+                        <li><strong>Output:</strong> Encrypted message.</li>
+                        <li><strong>Steps:</strong>
+                            <ol>
+                                <li>For each letter in the plaintext, find its position in the alphabet (A=0, B=1, ..., Z=25).</li>
+                                <li>Add the shift value to this position.</li>
+                                <li>Use modulo 26 to handle wrapping around the end of the alphabet.</li>
+                                <li>Convert the new position back to a letter.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Example:</strong>
+                    <ul>
+                        <li><strong>Plaintext:</strong> HELLO</li>
+                        <li><strong>Shift:</strong> 3</li>
+                        <li><strong>Encryption:</strong>
+                            <ul>
+                                <li>H (7) → K (10)</li>
+                                <li>E (4) → H (7)</li>
+                                <li>L (11) → O (14)</li>
+                                <li>L (11) → O (14)</li>
+                                <li>O (14) → R (17)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Encrypted Message:</strong> KHOOR</li>
+                    </ul>
+                </li>
+                <li><strong>Decryption Process:</strong>
+                    <ul>
+                        <li><strong>Input:</strong> Encrypted message.</li>
+                        <li><strong>Output:</strong> Decrypted message.</li>
+                        <li><strong>Steps:</strong>
+                            <ol>
+                                <li>For each letter in the encrypted message, find its position in the alphabet.</li>
+                                <li>Subtract the shift value.</li>
+                                <li>Use modulo 26 to handle wrapping around the beginning of the alphabet.</li>
+                                <li>Convert the new position back to a letter.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Example:</strong>
+                    <ul>
+                        <li><strong>Encrypted Message:</strong> KHOOR</li>
+                        <li><strong>Shift:</strong> 3</li>
+                        <li><strong>Decryption:</strong>
+                            <ul>
+                                <li>K (10) → H (7)</li>
+                                <li>H (7) → E (4)</li>
+                                <li>O (14) → L (11)</li>
+                                <li>O (14) → L (11)</li>
+                                <li>R (17) → O (14)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Decrypted Message:</strong> HELLO</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© Muhammad Huzaifa</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/ayymen.khan" class="social-link facebook"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/shorttemperd007/" class="social-link instagram"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/muhammad-huzaifa-anjum-a80aa0279/" class="social-link linkedin"><img src="images/link.png" alt="LinkedIn"></a>
+                <a href="https://x.com/ShortTemperd007" class="social-link x"><img src="images/x2.png" alt="X"></a>
+                <a href="https://api.whatsapp.com/send?phone=923106771230" class="social-link whatsapp"><img src="images/whats.png" alt="WhatsApp"></a>
+            </div>
+            <p class="address">Address: Opposite New Central Jail Arif Colony Street # 1 Building # 19</p>
+        </div>
+    </footer>
+
+    <script src="ceaser.js"></script>
+</body>
+</html>

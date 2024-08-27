@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DES Cipher</title>
+    <link rel="stylesheet" href="ceaser.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Cryptorium</h1>
+        <p class="slogan">Your Gateway to Cryptographic Mastery</p>
+        <nav>
+            <a href="home.html" class="navlink">Home</a>
+            <a href="ceaer cipher.html" class="navlink">Caesar</a>
+            <a href="affine.html" class="navlink">Affine</a>
+            <a href="veginere.html" class="navlink">Vigenere</a>
+            <a href="DES.html" class="navlink">DES</a>
+            <a href="AES.html" class="navlink">AES</a>
+            <a href="RSA.html" class="navlink">RSA</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Encrypt')" id="defaultOpen">Encrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'Decrypt')">Decrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">History</button>
+            <button class="tablinks" onclick="openTab(event, 'Working')">Working</button>
+        </div>
+
+        <div id="Encrypt" class="tabcontent">
+            <h2>Encrypt</h2>
+            <label for="encryptText">Enter Text:</label>
+            <input type="text" id="encryptText" placeholder="Enter text...">
+            <label for="encryptKey">Key:</label>
+            <input type="text" id="encryptKey" placeholder="Enter key..." readonly>
+            <button onclick="generateKey()">Generate Key</button>
+            <button onclick="encryptText()">Encrypt</button>
+            <label for="encryptedText">Encrypted Text:</label>
+            <input type="text" id="encryptedText" readonly>
+            <button onclick="clearText('encrypt')">Clear</button>
+        </div>
+
+        <div id="Decrypt" class="tabcontent">
+            <h2>Decrypt</h2>
+            <label for="decryptText">Enter Encrypted Text:</label>
+            <input type="text" id="decryptText" placeholder="Enter encrypted text...">
+            <label for="decryptKey">Key:</label>
+            <input type="text" id="decryptKey" placeholder="Enter key...">
+            <button onclick="decryptText()">Decrypt</button>
+            <label for="decryptedText">Decrypted Text:</label>
+            <input type="text" id="decryptedText" readonly>
+            <button onclick="clearText('decrypt')">Clear</button>
+        </div>
+
+        <div id="History" class="tabcontent">
+            <h2>History</h2>
+            <textarea id="history" readonly style="width: 100%; height: 150px;"></textarea>
+            <button onclick="clearHistory()">Clear History</button>
+            <button onclick="saveHistory()">Save History</button>
+            <button onclick="searchHistory()">Search History</button>
+        </div>
+
+        <div id="Working" class="tabcontent">
+            <h2>DES: History, Working, and Algorithm</h2>
+            <div id="working-content">
+                <div id="history-content">
+                    <h3>History</h3>
+                    <p>The Data Encryption Standard (DES) was developed in the early 1970s by IBM and later adopted by the U.S. National Institute of Standards and Technology (NIST) as a federal standard for encrypting non-classified information. The cipher was officially announced in 1977 and became widely used in various applications, including financial transactions, government communications, and secure data storage.</p>
+                    
+                    <h4>Key Historical Points:</h4>
+                    <ul>
+                        <li><strong>Development:</strong> IBM's research team, led by Horst Feistel, developed DES as part of a project known as Lucifer, which was eventually refined into DES.</li>
+                        <li><strong>Standardization:</strong> DES was adopted by the National Institute of Standards and Technology (NIST) as FIPS PUB 46 in 1977.</li>
+                        <li><strong>Security Concerns:</strong> In the late 1990s, advances in computing power led to concerns about DES's security. By 1998, DES was considered insecure against modern brute-force attacks, prompting the introduction of stronger encryption standards like AES (Advanced Encryption Standard).</li>
+                    </ul>
+                </div>
+                <h3>Working</h3>
+                <p>DES is a symmetric-key block cipher, meaning the same key is used for both encryption and decryption. It operates on fixed-size blocks of data and performs multiple rounds of processing to provide encryption.</p>
+
+                <h4>Key Concepts:</h4>
+                <ul>
+                    <li><strong>Block Cipher:</strong> DES encrypts data in fixed-size blocks of 64 bits.</li>
+                    <li><strong>Symmetric Key:</strong> DES uses a single key of 56 bits to encrypt and decrypt data.</li>
+                    <li><strong>Rounds:</strong> DES performs 16 rounds of complex transformations to ensure security.</li>
+                </ul>
+
+                <h3>Algorithm</h3>
+                <h4>1. Key Generation:</h4>
+                <ul>
+                    <li><strong>Initial Key:</strong> DES uses a 64-bit key, but only 56 bits are used for encryption, with 8 bits used for parity checks.</li>
+                    <li><strong>Key Schedule:</strong> The 56-bit key is divided into two 28-bit halves. These halves are rotated and permuted to generate 16 different subkeys, each used in one of the 16 rounds.</li>
+                </ul>
+
+                <h4>2. Initial Permutation (IP):</h4>
+                <p>The 64-bit plaintext block is subjected to an initial permutation (IP) that rearranges the bits according to a fixed table.</p>
+
+                <h4>3. Rounds:</h4>
+                <ul>
+                    <li><strong>Splitting:</strong> The permuted block is divided into two 32-bit halves: the left half (L0) and the right half (R0).</li>
+                    <li><strong>Feistel Function:</strong> Each round involves the Feistel function, which processes the right half and combines it with the left half using the round subkey.
+                        <ul>
+                            <li><strong>Expansion:</strong> The 32-bit right half is expanded to 48 bits.</li>
+                            <li><strong>Subkey Mixing:</strong> The expanded block is XORed with the round subkey.</li>
+                            <li><strong>Substitution:</strong> The result is substituted using S-boxes, which compress the data from 48 bits to 32 bits.</li>
+                            <li><strong>Permutation:</strong> The substituted block is permuted to form the new right half for the next round.</li>
+                        </ul>
+                    </li>
+                    <li>The halves are swapped at the end of each round.</li>
+                </ul>
+
+                <h4>4. Final Permutation (IP⁻¹):</h4>
+                <p>After 16 rounds, the final permutation (IP⁻¹) is applied to the block to produce the ciphertext.</p>
+
+                <h4>Example:</h4>
+                <p>Given plaintext <code>P</code> and key <code>K</code>, the encryption process can be outlined as follows:</p>
+                <ol>
+                    <li><strong>Initial Permutation (IP):</strong> Apply the initial permutation to <code>P</code>.</li>
+                    <li><strong>Rounds:</strong> For each round <code>i</code> (from 1 to 16):
+                        <ul>
+                            <li>Split the block into <code>L</code> and <code>R</code>.</li>
+                            <li>Compute the new <code>R</code> as: <code>R<sub>i</sub> = L<sub>i-1</sub> ⊕ F(R<sub>i-1</sub>, K<sub>i</sub>)</code></li>
+                            <li>Compute the new <code>L</code> as: <code>L<sub>i</sub> = R<sub>i-1</sub></code></li>
+                            <li>Swap <code>L</code> and <code>R</code>.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Final Permutation (IP⁻¹):</strong> Apply the final permutation to the result of the last round.</li>
+                </ol>
+
+                <h3>Decryption</h3>
+                <p>Decryption of DES is simply the reverse of the encryption process:</p>
+                <ul>
+                    <li><strong>Initial Permutation (IP):</strong> Apply to the ciphertext.</li>
+                    <li><strong>Rounds:</strong> Perform 16 rounds of Feistel function using the subkeys in reverse order.</li>
+                    <li><strong>Final Permutation (IP⁻¹):</strong> Apply to the result of the last round to get back the original plaintext.</li>
+                </ul>
+
+                <h3>Summary</h3>
+                <p>DES was a widely used symmetric-key algorithm providing strong security at its inception. However, due to its relatively short key length and susceptibility to brute-force attacks, it has largely been replaced by more secure algorithms like AES. Despite this, DES remains a foundational element in the study of cryptography.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© Muhammad Huzaifa</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/ayymen.khan" class="social-link facebook"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/shorttemperd007/" class="social-link instagram"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/muhammad-huzaifa-anjum-a80aa0279/" class="social-link linkedin"><img src="images/link.png" alt="LinkedIn"></a>
+                <a href="https://x.com/ShortTemperd007" class="social-link x"><img src="images/x2.png" alt="X"></a>
+                <a href="https://api.whatsapp.com/send?phone=923106771230" class="social-link whatsapp"><img src="images/whats.png" alt="WhatsApp"></a>
+            </div>
+            <p class="address">Address: Opposite New Central Jail Arif Colony Street # 1 Building # 19</p>
+        </div>
+    </footer>
+
+    <script src="DES.js"></script>
+
+    
+</body>
+</html>

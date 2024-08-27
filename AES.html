@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Cipher</title>
+    <link rel="stylesheet" href="ceaser.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+</head>
+
+
+<body>
+    <header>
+        <h1>Cryptorium</h1>
+        <p class="slogan">Your Gateway to Cryptographic Mastery</p>
+        <nav>
+            <a href="home.html" class="navlink">Home</a>
+            <a href="ceaer cipher.html" class="navlink">Caesar</a>
+            <a href="affine.html" class="navlink">Affine</a>
+            <a href="veginere.html" class="navlink">Vigenere</a>
+            <a href="DES.html" class="navlink">DES</a>
+            <a href="AES.html" class="navlink">AES</a>
+            <a href="RSA.html" class="navlink">RSA</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Encrypt')" id="defaultOpen">Encrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'Decrypt')">Decrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">History</button>
+            <button class="tablinks" onclick="openTab(event, 'Working')">Working</button>
+        </div>
+
+        <div id="Encrypt" class="tabcontent">
+            <h2>Encrypt</h2>
+            <label for="encryptText">Enter Text:</label>
+            <input type="text" id="encryptText" placeholder="Enter text...">
+            <label for="encryptionKey">Encryption Key:</label>
+            <input type="text" id="encryptionKey" placeholder="Enter key...">
+            <button onclick="encryptText()">Encrypt</button>
+            <label for="encryptedText">Encrypted Text:</label>
+            <input type="text" id="encryptedText" readonly>
+            <button onclick="clearText('encrypt')">Clear</button>
+        </div>
+
+        <div id="Decrypt" class="tabcontent">
+            <h2>Decrypt</h2>
+            <label for="decryptText">Enter Encrypted Text:</label>
+            <input type="text" id="decryptText" placeholder="Enter encrypted text...">
+            <label for="decryptionKey">Decryption Key:</label>
+            <input type="text" id="decryptionKey" placeholder="Enter key...">
+            <button onclick="decryptText()">Decrypt</button>
+            <label for="decryptedText">Decrypted Text:</label>
+            <input type="text" id="decryptedText" readonly>
+            <button onclick="clearText('decrypt')">Clear</button>
+        </div>
+
+        <div id="History" class="tabcontent">
+            <h2>History</h2>
+            <textarea id="history" readonly></textarea>
+            <button onclick="clearHistory()">Clear History</button>
+            <button onclick="saveHistory()">Save History</button>
+            <button onclick="searchHistory()">Search History</button>
+        </div>
+
+        <!-- AES Cipher Article Section -->
+        <div id="Working" class="tabcontent">
+            <h2>AES Cipher</h2>
+            <section id="history">
+                <h3>History</h3>
+                <p>
+                    The Advanced Encryption Standard (AES) was established as the encryption standard by the National Institute of Standards and Technology (NIST) in 2001. AES was developed to replace the aging Data Encryption Standard (DES), which was becoming vulnerable to brute-force attacks due to its relatively short key length.
+                </p>
+                <p>
+                    In 1997, NIST initiated a public competition to find a suitable replacement for DES. This process, known as the AES competition, attracted submissions from cryptographers worldwide. The Rijndael cipher, developed by Belgian cryptographers Vincent Rijmen and Joan Daemen, was selected due to its security, efficiency, and flexibility.
+                </p>
+                <p>
+                    AES supports key sizes of 128, 192, or 256 bits and operates on blocks of 128 bits of plaintext. It quickly became the standard for encrypting sensitive but unclassified information in the United States and globally.
+                </p>
+            </section>
+            <section id="working">
+                <h3>Working</h3>
+                <p>
+                    AES is a symmetric-key block cipher that encrypts data in fixed-size blocks (128 bits) using the same key for both encryption and decryption. The algorithm operates on a block of plaintext and performs a series of transformations on the data.
+                </p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Block Cipher:</strong> AES processes data in blocks of 128 bits and supports key sizes of 128, 192, or 256 bits.</li>
+                    <li><strong>Rounds:</strong> The number of rounds varies with the key size (10 rounds for 128-bit keys, 12 rounds for 192-bit keys, and 14 rounds for 256-bit keys).</li>
+                </ul>
+                <h4>Algorithm</h4>
+                <ul>
+                    <li><strong>Key Expansion:</strong> The original key is expanded into multiple round keys using the Rijndael key schedule.</li>
+                    <li><strong>Initial Round:</strong> Apply AddRoundKey (XOR the block with the first round key).</li>
+                    <li><strong>Main Rounds:</strong></li>
+                    <ul>
+                        <li>Apply SubBytes (Substitute each byte using the S-box).</li>
+                        <li>Apply ShiftRows (Shift rows of the block to the left).</li>
+                        <li>Apply MixColumns (Mix columns to provide diffusion).</li>
+                        <li>Apply AddRoundKey (XOR the block with the round key).</li>
+                    </ul>
+                    <li><strong>Final Round:</strong> Similar to the main rounds, but without MixColumns.</li>
+                    <ul>
+                        <li>Apply SubBytes (Substitute each byte using the S-box).</li>
+                        <li>Apply ShiftRows (Shift rows of the block).</li>
+                        <li>Apply AddRoundKey (XOR the block with the final round key).</li>
+                    </ul>
+                </ul>
+                <p><strong>Example of AES Algorithm:</strong></p>
+                <ul>
+                    <li><strong>Encryption:</strong></li>
+                    <ul>
+                        <li>Key Expansion: Generate round keys from the original key.</li>
+                        <li>Initial Round: Apply AddRoundKey.</li>
+                        <li>Main Rounds: Apply SubBytes, ShiftRows, MixColumns, and AddRoundKey.</li>
+                        <li>Final Round: Apply SubBytes, ShiftRows, and AddRoundKey.</li>
+                        <li>Result: The transformed block is the encrypted ciphertext.</li>
+                    </ul>
+                    <li><strong>Decryption:</strong></li>
+                    <ul>
+                        <li>Key Expansion: Generate round keys as in encryption.</li>
+                        <li>Initial Round (reverse steps of encryption): Apply AddRoundKey.</li>
+                        <li>Main Rounds (reverse steps): Apply InvShiftRows, InvSubBytes, AddRoundKey, and InvMixColumns.</li>
+                        <li>Final Round (reverse steps): Apply InvShiftRows, InvSubBytes, and AddRoundKey.</li>
+                        <li>Result: The final output block is the decrypted plaintext.</li>
+                    </ul>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© Muhammad Huzaifa</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/ayymen.khan" class="social-link facebook"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/shorttemperd007/" class="social-link instagram"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/muhammad-huzaifa-anjum-a80aa0279/" class="social-link linkedin"><img src="images/link.png" alt="LinkedIn"></a>
+                <a href="https://x.com/ShortTemperd007" class="social-link x"><img src="images/x2.png" alt="X"></a>
+                <a href="https://api.whatsapp.com/send?phone=923106771230" class="social-link whatsapp"><img src="images/whats.png" alt="WhatsApp"></a>
+            </div>
+            <p class="address">Address: Opposite New Central Jail Arif Colony Street # 1 Building # 19</p>
+        </div>
+    </footer>
+
+    <script src="AES.js"></script>
+</body>
+</html>

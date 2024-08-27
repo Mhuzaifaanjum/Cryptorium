@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Cipher</title>
+    <link rel="stylesheet" href="ceaser.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Cryptorium</h1>
+        <p class="slogan">Your Gateway to Cryptographic Mastery</p>
+        <nav>
+            <a href="home.html" class="navlink">Home</a>
+            <a href="ceaer cipher.html" class="navlink">Caesar</a>
+            <a href="affine.html" class="navlink">Affine</a>
+            <a href="veginere.html" class="navlink">Vigenere</a>
+            <a href="DES.html" class="navlink">DES</a>
+            <a href="AES.html" class="navlink">AES</a>
+            <a href="RSA.html" class="navlink">RSA</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Encrypt')" id="defaultOpen">Encrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'Decrypt')">Decrypt</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">History</button>
+            <button class="tablinks" onclick="openTab(event, 'Working')">Working</button>
+            <button class="tablinks" onclick="openTab(event, 'GenerateKey')">Generate Key</button>
+        </div>
+    
+        <div id="Encrypt" class="tabcontent">
+            <h2>Encrypt</h2>
+            <label for="encryptText">Enter Text:</label>
+            <input type="text" id="encryptText" placeholder="Enter text...">
+            <label for="publicKey">Public Key:</label>
+            <textarea id="publicKey" placeholder="Enter or paste public key..."></textarea>
+            <button onclick="encryptText()">Encrypt</button>
+            <label for="encryptedText">Encrypted Text:</label>
+            <input type="text" id="encryptedText" readonly>
+            <button onclick="clearText('encrypt')">Clear</button>
+        </div>
+    
+        <div id="Decrypt" class="tabcontent">
+            <h2>Decrypt</h2>
+            <label for="decryptText">Enter Encrypted Text:</label>
+            <input type="text" id="decryptText" placeholder="Enter encrypted text...">
+            <label for="privateKey">Private Key:</label>
+            <textarea id="privateKey" placeholder="Enter or paste private key..."></textarea>
+            <button onclick="decryptText()">Decrypt</button>
+            <label for="decryptedText">Decrypted Text:</label>
+            <input type="text" id="decryptedText" readonly>
+            <button onclick="clearText('decrypt')">Clear</button>
+        </div>
+    
+        <div id="History" class="tabcontent">
+            <h2>History</h2>
+            <textarea id="history" readonly></textarea>
+            <button onclick="clearHistory()">Clear History</button>
+            <button onclick="saveHistory()">Save History</button>
+            <button onclick="searchHistory()">Search History</button>
+        </div>
+    
+        <div id="GenerateKey" class="tabcontent">
+            <h2>Generate RSA Key</h2>
+            <label for="keySize">Key Size:</label>
+            <select id="keySize">
+                <option value="2048">2048-bit</option>
+                <option value="4096">4096-bit</option>
+            </select>
+            <button onclick="generateKeys()">Generate Key</button>
+            <label for="publicKey">Public Key:</label>
+            <textarea id="publicKey" readonly></textarea>
+            <label for="privateKey">Private Key:</label>
+            <textarea id="privateKey" readonly></textarea>
+            <button onclick="clearKeys()">Clear Keys</button>
+        </div>
+
+        <!-- RSA Cipher Article Section -->
+        <div id="Working" class="tabcontent">
+            <h2>RSA Cipher</h2>
+            <section id="history">
+                <h3>History</h3>
+                <p>
+                    The RSA cipher was introduced in 1977 by Ron Rivest, Adi Shamir, and Leonard Adleman at MIT. Named after the initials of its inventors, RSA was a groundbreaking development in cryptography, providing a way to securely exchange information without needing a shared secret key. RSA's security relies on the complexity of factoring large composite numbers, which remains a computational challenge.
+                </p>
+                <p>
+                    The RSA algorithm was one of the first practical implementations of public-key cryptography, following the theoretical work of Diffie and Hellman on public-key exchange. Its adoption has had a profound impact on modern secure communication, becoming a cornerstone of internet security protocols.
+                </p>
+            </section>
+            <section id="working">
+                <h3>Working</h3>
+                <p>
+                    RSA operates on the principle of public-key cryptography, where two keys are used: a public key for encryption and a private key for decryption. The security of RSA is based on the mathematical challenge of factoring large numbers into their prime components.
+                </p>
+                <h4>Key Concepts</h4>
+                <ul>
+                    <li><strong>Prime Numbers:</strong> RSA relies on the product of two large prime numbers to create a modulus for encryption and decryption.</li>
+                    <li><strong>Public and Private Keys:</strong> The public key is used for encryption, and the private key is used for decryption. Only the private key can decrypt data encrypted with the corresponding public key.</li>
+                    <li><strong>Modular Arithmetic:</strong> RSA uses modular arithmetic to perform encryption and decryption operations, specifically working modulo the product of the two primes.</li>
+                </ul>
+            </section>
+            <section id="algorithm">
+                <h3>Algorithm</h3>
+                <h4>Encryption</h4>
+                <p>
+                    <strong>Key Generation:</strong> Generate two large prime numbers, \( p \) and \( q \). Compute \( n = p \times q \), and calculate the totient \( \phi(n) = (p - 1) \times (q - 1) \). Choose a public exponent \( e \) such that \( 1 < e < \phi(n) \) and \( e \) is coprime with \( \phi(n) \). Compute the private exponent \( d \), which is the modular inverse of \( e \) modulo \( \phi(n) \).
+                </p>
+                <p>
+                    <strong>Encryption Formula:</strong>
+                    <br><code>C = M^e \mod n</code>
+                    <br>where \( M \) is the plaintext message converted to a number, and \( C \) is the resulting ciphertext.
+                </p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Plaintext: 12</li>
+                    <li>Public Key: \( (n = 3233, e = 17) \)</li>
+                    <li>Encryption: <code>C = 12^17 \mod 3233 = 2201</code></li>
+                </ul>
+
+                <h4>Decryption</h4>
+                <p>
+                    <strong>Decryption Formula:</strong>
+                    <br><code>M = C^d \mod n</code>
+                    <br>where \( C \) is the ciphertext, \( d \) is the private exponent, and \( M \) is the decrypted plaintext message.
+                </p>
+                <p><strong>Example:</strong></p>
+                <ul>
+                    <li>Ciphertext: 2201</li>
+                    <li>Private Key: \( (n = 3233, d = 2753) \)</li>
+                    <li>Decryption: <code>M = 2201^2753 \mod 3233 = 12</code></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© Muhammad Huzaifa</p>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/ayymen.khan" class="social-link facebook"><img src="images/fb.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com/shorttemperd007/" class="social-link instagram"><img src="images/insta.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/muhammad-huzaifa-anjum-a80aa0279/" class="social-link linkedin"><img src="images/link.png" alt="LinkedIn"></a>
+                <a href="https://x.com/ShortTemperd007" class="social-link x"><img src="images/x2.png" alt="X"></a>
+                <a href="https://api.whatsapp.com/send?phone=923106771230" class="social-link whatsapp"><img src="images/whats.png" alt="WhatsApp"></a>
+            </div>
+            <p class="address">Address: Opposite New Central Jail Arif Colony Street # 1 Building # 19</p>
+        </div>
+    </footer>
+
+    <script src="RSA.js"></script>
+</body>
+</html>
